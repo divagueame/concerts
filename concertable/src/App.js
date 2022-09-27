@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+import Concerts from './components/concerts';
+import { useEffect, useState} from 'react';
 
+const API_URL = 'http://localhost:3000/api/v1/concerts';
+
+function getAPIData(){
+  console.log('API DATA!')
+  return axios.get(API_URL).then((response)=> response.data)  
+}
 function App() {
+  const [concerts, setConcerts]= useState([]);
+  useEffect(()=>{
+    let mounted = true;
+    getAPIData().then((items)=>{
+      if (mounted){
+        setConcerts(items)
+      }
+    });
+  return () => (mounted = false);
+  }, []);
+  
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Concerts concerts={concerts} />
     </div>
   );
 }
