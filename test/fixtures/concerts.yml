@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2022-09-27 22:18:02
+  band: MyString
+  price: 1.5
+
+two:
+  date: 2022-09-27 22:18:02
+  band: MyString
+  price: 1.5
